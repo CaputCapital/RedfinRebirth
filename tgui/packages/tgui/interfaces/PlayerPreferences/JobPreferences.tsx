@@ -1,0 +1,405 @@
+import { useState } from 'react';
+import {
+  Box,
+  Button,
+  Flex,
+  LabeledList,
+  Modal,
+  Section,
+  Stack,
+} from 'tgui-core/components';
+
+import { useBackend } from '../../backend';
+
+export const JobPreferences = (props) => {
+  const { act, data } = useBackend<JobPreferencesData>();
+  const {
+    alternate_option,
+    squads,
+    squads_som,
+    preferred_squad,
+    preferred_squad_som,
+    overflow_job,
+    special_occupations,
+    special_occupation,
+  } = data;
+  const [shownDescription, setShownDescription] = useState(null);
+
+  const xenoJobs = ['Xeno Queen', 'Xenomorph', 'Corrupted Xenomorph'];
+  const commandRoles = [
+    'Commander',
+    'Field Commander',
+    'Staff Officer',
+    'Pilot Officer',
+    'Transport Officer',
+    'Synthetic',
+    'AI',
+    'Mech Pilot',
+    'Vanguard Unit',
+  ];
+  const supportRoles = [
+    'Chief Ship Engineer',
+    'Ship Technician',
+    'Requisitions Officer',
+    'Chief Medical Officer',
+    'Medical Doctor',
+    'Medical Researcher',
+    'Assault Crewman',
+    'Transport Crewman',
+    'CorpSec Officer',
+  ];
+  const marineJobs = [
+    'Squad Slut',
+    'Squad Operative',
+    'Squad Engineer',
+    'Squad Corpsman',
+    'Squad Smartgunner',
+    'Squad Specialist',
+    'Squad Leader',
+  ];
+  const somJobs = [
+    'SOM Squad Standard',
+    'SOM Squad Engineer',
+    'SOM Squad Medic',
+    'SOM Squad Veteran',
+    'SOM Squad Leader',
+    'SOM Synthetic',
+    'SOM Technician',
+    'SOM Medical Doctor',
+    'SOM Mech Pilot',
+    'SOM Staff Officer',
+    'SOM Pilot Officer',
+    'SOM Assault Crewman',
+    'Sons of Mars Representative',
+    'SOM Chief Medical Officer',
+    'SOM Chief Engineer',
+    'SOM Requisitions Officer',
+    'SOM Military Police',
+    'SOM Chief MP',
+    'SOM Field Commander',
+    'SOM Commander',
+  ];
+  const flavourJobs = [
+    'Operations Officer',
+    'Archercorp Liaison',
+    'Novamed Liaison',
+    'TRANSCo Liaison',
+    'Worker',
+    'Morale Officer',
+    'Prisoner',
+    'SOM Prisoner',
+    'Cult Prisoner',
+  ];
+  const clfJobs = [
+    'Cult Offering',
+    'Cultist',
+    'Cultist Mender',
+    'Cultist Champion',
+    'Cult Synthetic',
+    'Cultist Archmender',
+    'Cultist Sect Leader',
+    'Cultist Technomancer',
+    'Cult Representative',
+    'Cult Messiah',
+  ];
+  const cmJobs = [
+    'CM Standard',
+    'CM Medic',
+    'CM Guardsman',
+    'CM Squad Leader',
+    'CM Base Technician',
+    'Colonial Militia Representative',
+    'CM Commander',
+    'CM Militia Captain',
+    'CM Colony Administrator',
+  ];
+  const kzJobs = [
+    'KZ Standard',
+    'KZ Medic',
+    'KZ Engineer',
+    'KZ Specialist',
+    'KZ Combat Escort',
+    'KZ Synthetic',
+    'KZ Squad Leader',
+    'Kaizoku Liaison',
+  ];
+  const ColonistJobs = [
+    'Assistant Colonist',
+    'Scientist Colonist',
+    'Doctor Colonist',
+    'Liaison Colonist',
+    'Security Guard Colonist',
+    'Civilian Colonist',
+    'Chef Colonist',
+    'Botanist Colonist',
+    'Technician Colonist',
+    'Chaplain Colonist',
+    'Miner Colonist',
+    'Salesman Colonist',
+    'Colonial Marshal Colonist',
+    'Bartender Colonist',
+    'Pharmacy Technician Colonist',
+    'Roboticist Colonist',
+    'Non-Deployed Operative Colonist',
+    'Prisoner Colonist',
+    'Stripper Colonist',
+    'Maid Colonist',
+    'Synthetic Colonist',
+  ];
+  const pmcJobs = [
+    'AC Standard',
+    'AC Medic',
+    'AC Engineer',
+    'AC Gunner',
+    'AC Specialist',
+    'AC Squad Leader',
+  ];
+
+  const JobList = ({ name, jobs }) => (
+    <Section title={name}>
+      <LabeledList>
+        {jobs.map((job) => (
+          <JobPreference
+            key={job}
+            job={job}
+            setShownDescription={setShownDescription}
+          />
+        ))}
+      </LabeledList>
+    </Section>
+  );
+
+  return (
+    <Section
+      title="Job Preferences"
+      buttons={
+        <Button color="bad" icon="power-off" onClick={() => act('jobreset')}>
+          Reset everything!
+        </Button>
+      }
+    >
+      {shownDescription && (
+        <Modal width="500px" min-height="300px">
+          <Box dangerouslySetInnerHTML={{ __html: shownDescription }} />
+          <Box align="right">
+            <Button align="right" onClick={() => setShownDescription(null)}>
+              X
+            </Button>
+          </Box>
+        </Modal>
+      )}
+      <Stack>
+        <Stack.Item grow>
+          <JobList name="Command Jobs" jobs={commandRoles} />
+        </Stack.Item>
+        <Stack.Item grow>
+          <JobList name="Support Jobs" jobs={supportRoles} />
+        </Stack.Item>
+      </Stack>
+      <Stack>
+        <Stack.Item grow>
+          <JobList name="Xenomorph Jobs" jobs={xenoJobs} />
+        </Stack.Item>
+        <Stack.Item grow>
+          <JobList name="Flavour Jobs" jobs={flavourJobs} />
+        </Stack.Item>
+      </Stack>
+      <Stack>
+        <Stack.Item grow>
+          <JobList name="Marine Jobs" jobs={marineJobs} />
+        </Stack.Item>
+        <Stack.Item grow>
+          <Section title="Other settings">
+            <Flex direction="column" height="100%">
+              <Flex.Item>
+                <h4>If failed to qualify for job</h4>
+                <Button.Checkbox
+                  inline
+                  content={'Take a random job'}
+                  checked={alternate_option === 0}
+                  onClick={() => act('jobalternative', { newValue: 0 })}
+                />
+                <Button.Checkbox
+                  inline
+                  content={`Spawn as ${overflow_job}`}
+                  checked={alternate_option === 1}
+                  onClick={() => act('jobalternative', { newValue: 1 })}
+                />
+                <Button.Checkbox
+                  inline
+                  content={'Return to lobby'}
+                  checked={alternate_option === 2}
+                  onClick={() => act('jobalternative', { newValue: 2 })}
+                />
+              </Flex.Item>
+              <Flex.Item>
+                <h4>Preferred Squad</h4>
+                {Object.values(squads).map((squad) => (
+                  <Button.Checkbox
+                    key={squad}
+                    inline
+                    content={squad}
+                    checked={preferred_squad === squad}
+                    onClick={() => act('squad', { newValue: squad })}
+                  />
+                ))}
+              </Flex.Item>
+              <Flex.Item>
+                <h4>Preferred Squad - SOM</h4>
+                {Object.values(squads_som).map((squad_som) => (
+                  <Button.Checkbox
+                    key={squad_som}
+                    inline
+                    content={squad_som}
+                    checked={preferred_squad_som === squad_som}
+                    onClick={() => act('squad_som', { newValue: squad_som })}
+                  />
+                ))}
+              </Flex.Item>
+              <Flex.Item>
+                <h4>Occupational choices</h4>
+                {Object.keys(special_occupations).map((special, idx) => {
+                  const specialOccupation = special_occupations[special];
+                  return (
+                    <>
+                      <Button.Checkbox
+                        key={specialOccupation.flag}
+                        inline
+                        content={special}
+                        tooltip={specialOccupation.tooltip}
+                        checked={special_occupation & specialOccupation.flag}
+                        onClick={() =>
+                          act('be_special', {
+                            flag: specialOccupation.flag,
+                          })
+                        }
+                      />
+                      {idx === 1 && <br />}
+                    </>
+                  );
+                })}
+              </Flex.Item>
+            </Flex>
+          </Section>
+        </Stack.Item>
+      </Stack>
+      <Stack>
+        <Stack.Item grow>
+          <JobList name="SOM Jobs" jobs={somJobs} />
+        </Stack.Item>
+        <Stack.Item grow>
+          <JobList name="Colonist Jobs" jobs={ColonistJobs} />
+        </Stack.Item>
+      </Stack>
+      <Stack>
+        <Stack.Item grow>
+          <JobList name="Cult Jobs" jobs={clfJobs} />
+        </Stack.Item>
+        <Stack.Item grow>
+          <JobList name="AC Jobs" jobs={pmcJobs} />
+        </Stack.Item>
+      </Stack>
+      <Stack>
+        <Stack.Item grow>
+          <JobList name="CM Jobs" jobs={cmJobs} />
+        </Stack.Item>
+        <Stack.Item grow>
+          <JobList name="KZ Jobs" jobs={kzJobs} />
+        </Stack.Item>
+      </Stack>
+    </Section>
+  );
+};
+
+const JobPreference = (props) => {
+  const { act, data } = useBackend<JobPreferenceData>();
+  const { jobs, job_preferences } = data;
+  const { job, setShownDescription } = props;
+  const jobData = jobs[job];
+  const preference = job_preferences[job];
+
+  if (!jobData) {
+    return (
+      <LabeledList.Item label={job}>
+        <Box align="right">
+          <Button.Checkbox
+            inline
+            icon="exclamation-triangle"
+            color="bad"
+            content={'Sorry, coders fucked this up'}
+            onClick={() =>
+              setShownDescription(
+                'failed to find /datum/job with title "' +
+                  job +
+                  '" in SSjob.joinable_occupations in /datum/preferences/ui_static_data(mob/user) ',
+              )
+            }
+          />
+          <Button
+            content="?"
+            onClick={() =>
+              setShownDescription(
+                'failed to find /datum/job with title "' +
+                  job +
+                  '" in SSjob.joinable_occupations in /datum/preferences/ui_static_data(mob/user) ',
+              )
+            }
+          />
+        </Box>
+      </LabeledList.Item>
+    );
+  }
+
+  if (jobData.banned) {
+    return (
+      <LabeledList.Item label={job}>
+        <Box align="right">
+          <Button.Checkbox
+            inline
+            icon="ban"
+            color="bad"
+            content={'Banned from Role'}
+            onClick={() => act('bancheck', { role: job })}
+          />
+        </Box>
+      </LabeledList.Item>
+    );
+  }
+
+  return (
+    <LabeledList.Item label={job}>
+      <Box align="right">
+        <Button.Checkbox
+          inline
+          content={'High'}
+          checked={preference === 3}
+          onClick={() => act('jobselect', { job, level: 3 })}
+        />
+        <Button.Checkbox
+          inline
+          content={'Medium'}
+          checked={preference === 2}
+          onClick={() => act('jobselect', { job, level: 2 })}
+        />
+        <Button.Checkbox
+          inline
+          content={'Low'}
+          checked={preference === 1}
+          onClick={() => act('jobselect', { job, level: 1 })}
+        />
+        <Button.Checkbox
+          inline
+          content={'Never'}
+          checked={!preference}
+          onClick={() => act('jobselect', { job, level: 0 })}
+        />
+        {jobData.description && (
+          <Button
+            content="?"
+            onClick={() => setShownDescription(jobData.description)}
+          />
+        )}
+      </Box>
+    </LabeledList.Item>
+  );
+};
