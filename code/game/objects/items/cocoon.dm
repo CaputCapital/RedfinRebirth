@@ -1,0 +1,176 @@
+/obj/structure/cocoon
+	name = "resin cocoon"
+	desc = "A slimy-looking cocoon made out of resin. It is vibrating."
+	icon = 'icons/obj/cocoon.dmi'
+	icon_state = "xeno_cocoon"
+	density = FALSE
+	layer = BELOW_OBJ_LAYER
+	hit_sound = 'sound/effects/alien/resin_break2.ogg'
+	max_integrity = 100
+	anchored = TRUE
+	obj_flags = CAN_BE_HIT
+	resistance_flags = UNACIDABLE|XENO_DAMAGEABLE
+	///Which hive it belongs too
+	var/hivenumber
+	///What is inside the cocoon
+	var/mob/living/victim
+	///How much time the cocoon takes to deplete the life force of the marine
+	var/cocoon_life_time = 5 MINUTES
+	///Standard busy check
+	var/busy = FALSE
+	///How much larva points it gives at the end of its life time (8 points for one larva in distress)
+	var/larva_point_reward = 1.5
+
+
+/obj/structure/cocoon/Initialize(mapload, _hivenumber, mob/living/_victim)
+	. = ..()
+	if(!_hivenumber)
+		return
+	hivenumber = _hivenumber
+	var/datum/hive_status/hive = GLOB.hive_datums[hivenumber]
+	name = "[hive.prefix][name]"
+	if(hive.color)
+		color = gradient(COLOR_BLACK, hive.color, 0.5)
+	victim = _victim
+	victim.forceMove(src)
+	START_PROCESSING(SSslowprocess, src)
+	if(SSticker.IsRoundInProgress())
+		GLOB.round_statistics.cocoons++
+	addtimer(CALLBACK(src, PROC_REF(life_draining_over), null, TRUE), cocoon_life_time)
+	RegisterSignal(SSdcs, COMSIG_GLOB_DROPSHIP_HIJACKED, PROC_REF(life_draining_over))
+	RegisterSignal(src, COMSIG_MOVABLE_SHUTTLE_CRUSH, PROC_REF(on_shuttle_crush))
+
+/obj/structure/cocoon/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	if(anchored && victim && ishuman(user))
+		. += span_notice("There seems to be someone inside it.")
+
+/obj/structure/cocoon/process()
+	var/psych_points_output = COCOON_PSY_POINTS_REWARD_MIN + ((HIGH_PLAYER_POP - SSmonitor.maximum_connected_players_count) / HIGH_PLAYER_POP * (COCOON_PSY_POINTS_REWARD_MAX - COCOON_PSY_POINTS_REWARD_MIN))
+	psych_points_output = clamp(psych_points_output, COCOON_PSY_POINTS_REWARD_MIN, COCOON_PSY_POINTS_REWARD_MAX)
+	var/multiplier = (victim.stat != DEAD && !HAS_TRAIT(victim, TRAIT_HIVE_TARGET)) ? 0.3 : 1
+	psych_points_output *= multiplier
+	GLOB.round_statistics.strategic_psypoints_from_cocoons += psych_points_output
+	SSpoints.add_strategic_psy_points(hivenumber, psych_points_output)
+	SSpoints.add_tactical_psy_points(hivenumber, psych_points_output*0.25)
+	//Gives marine cloneloss for a total of 30.
+	victim.adjustCloneLoss(0.5)
+	SSpoints.add_biomass_points(hivenumber, MUTATION_BIOMASS_PER_COCOON_TICK * multiplier)
+	GLOB.round_statistics.biomass_from_cocoons += MUTATION_BIOMASS_PER_COCOON_TICK * multiplier
+
+/obj/structure/cocoon/take_damage(damage_amount, damage_type = BRUTE, armor_type = null, effects = TRUE, attack_dir, armour_penetration = 0, mob/living/blame_mob)
+	. = ..()
+	if(anchored && obj_integrity < max_integrity / 2)
+		unanchor_from_nest()
+
+///Allow the cocoon to be opened and dragged
+/obj/structure/cocoon/proc/unanchor_from_nest()
+	var/obj/structure/bed/nest/our_nest = locate() in loc
+	if(!our_nest)
+		our_nest = new
+	anchored = FALSE
+	update_icon()
+	playsound(loc, SFX_ALIEN_RESIN_MOVE, 35)
+
+///Stop producing points and release the victim if needed
+/obj/structure/cocoon/proc/life_draining_over(datum/source, must_release_victim = FALSE)
+	SIGNAL_HANDLER
+	var/multiplier = (victim.stat != DEAD && !HAS_TRAIT(victim, TRAIT_HIVE_TARGET)) ? 0.4 : 1
+	STOP_PROCESSING(SSslowprocess, src)
+	if(anchored)
+		unanchor_from_nest()
+	if(must_release_victim)
+		var/datum/job/xeno_job = SSjob.GetJobType(GLOB.hivenumber_to_job_type[hivenumber])
+		xeno_job.add_job_points(larva_point_reward * multiplier)
+		var/datum/hive_status/hive_status = GLOB.hive_datums[hivenumber]
+		hive_status.update_tier_limits()
+		GLOB.round_statistics.larva_from_cocoon += larva_point_reward * multiplier / xeno_job.job_points_needed
+		SSpoints.add_biomass_points(hivenumber, MUTATION_BIOMASS_PER_COCOON_COMPLETION  * multiplier)
+		GLOB.round_statistics.biomass_from_cocoons += MUTATION_BIOMASS_PER_COCOON_COMPLETION * multiplier
+		release_victim()
+	update_icon()
+
+/obj/structure/cocoon/Destroy()
+	if(victim)
+		release_victim()
+	return ..()
+
+/// Signal proc, makes sure the victim gets gibbed if a shuttle lands on the cocoon
+/obj/structure/cocoon/proc/on_shuttle_crush(datum/source, obj/docking_port/mobile/shuttle)
+	SIGNAL_HANDLER
+	release_victim(TRUE)
+
+///Open the cocoon and move the victim out
+/obj/structure/cocoon/proc/release_victim(gib = FALSE)
+	REMOVE_TRAIT(victim, TRAIT_STASIS, TRAIT_STASIS)
+	playsound(loc, SFX_ALIEN_RESIN_MOVE, 35)
+	victim.forceMove(loc)
+	victim.setDir(NORTH)
+	victim.med_hud_set_status()
+	if(gib)
+		victim.gib()
+	victim = null
+	obj_integrity = 1
+	max_integrity = 1
+	STOP_PROCESSING(SSslowprocess, src)
+
+/obj/structure/cocoon/attacked_by(obj/item/I, mob/living/user, def_zone)
+	if(!anchored && victim)
+		if(busy)
+			return
+		if(!I.sharp)
+			return
+		busy = TRUE
+		var/channel = SSsounds.random_available_channel()
+		playsound(user, "sound/effects/cutting_cocoon.ogg", 30, channel = channel)
+		if(!do_after(user, 8 SECONDS, TRUE, src))
+			busy = FALSE
+			user.stop_sound_channel(channel)
+			return
+		release_victim()
+		update_icon()
+		busy = FALSE
+		return
+	return ..()
+
+/obj/structure/cocoon/attack_hand(mob/living/user)
+	if(!anchored && victim)
+		if(busy)
+			return
+		busy = TRUE
+		var/channel = SSsounds.random_available_channel()
+		playsound(user, "sound/effects/cutting_cocoon.ogg", 30, channel = channel)
+		if(!do_after(user, 1 MINUTES, TRUE, src))
+			busy = FALSE
+			user.stop_sound_channel(channel)
+			return
+		release_victim()
+		update_icon()
+		busy = FALSE
+		return
+	unanchor_from_nest()
+
+
+/obj/structure/cocoon/update_icon_state()
+	. = ..()
+	if(anchored)
+		icon_state = "xeno_cocoon"
+		return
+	if(victim)
+		icon_state = "xeno_cocoon_unnested"
+		return
+	icon_state = "xeno_cocoon_open"
+
+/* //Its kinda hot to be pulled around by an evil cacoon mommy
+/obj/structure/cocoon/can_be_pulled(user, force)
+	if(isxeno(user))
+		return FALSE
+	return ..() */
+
+/obj/structure/cocoon/opened_cocoon
+	icon_state = "xeno_cocoon_open"
+	anchored = FALSE
+
+/obj/structure/cocoon/opened_cocoon/Initialize(mapload)
+	. = ..()
+	new /obj/structure/bed/nest(loc)
