@@ -1,0 +1,374 @@
+GLOBAL_LIST_INIT(quick_loadouts, init_quick_loadouts())
+
+///The list is shared across all quick vendors, but they will only display the tabs specified by the vendor, and only show the loadouts with jobs that match the displayed tabs.
+/proc/init_quick_loadouts()
+	. = list()
+	var/list/loadout_list = list(
+		/datum/outfit/quick/tgmc/marine/standard_carbine,
+		/datum/outfit/quick/tgmc/marine/standard_assaultrifle,
+		/datum/outfit/quick/tgmc/marine/combat_rifle,
+		/datum/outfit/quick/tgmc/marine/standard_laserrifle,
+		/datum/outfit/quick/tgmc/marine/standard_battlerifle,
+		/datum/outfit/quick/tgmc/marine/standard_skirmishrifle,
+		/datum/outfit/quick/tgmc/marine/alf_shocktrooper,
+		/datum/outfit/quick/tgmc/marine/standard_machinegunner,
+		/datum/outfit/quick/tgmc/marine/medium_machinegunner,
+		/datum/outfit/quick/tgmc/marine/standard_lasermg,
+		/datum/outfit/quick/tgmc/marine/pyro,
+		/datum/outfit/quick/tgmc/marine/standard_shotgun,
+		/datum/outfit/quick/tgmc/marine/standard_lasercarbine,
+		/datum/outfit/quick/tgmc/marine/light_carbine,
+		/datum/outfit/quick/tgmc/marine/shield_tank,
+		/datum/outfit/quick/tgmc/marine/machete,
+		/datum/outfit/quick/tgmc/marine/scout,
+		/datum/outfit/quick/tgmc/engineer/rrengineer,
+		/datum/outfit/quick/tgmc/engineer/sentry,
+		/datum/outfit/quick/tgmc/engineer/demolition,
+		/datum/outfit/quick/tgmc/corpsman/standard_medic,
+		/datum/outfit/quick/tgmc/corpsman/standard_smg,
+		/datum/outfit/quick/tgmc/corpsman/standard_skirmishrifle,
+		/datum/outfit/quick/tgmc/corpsman/auto_shotgun,
+		/datum/outfit/quick/tgmc/corpsman/laser_medic,
+		/datum/outfit/quick/tgmc/corpsman/laser_carbine,
+		/datum/outfit/quick/tgmc/smartgunner/standard_sg,
+		/datum/outfit/quick/tgmc/smartgunner/minigun_sg,
+		/datum/outfit/quick/tgmc/smartgunner/target_rifle,
+		/datum/outfit/quick/tgmc/leader/standard_assaultrifle,
+		/datum/outfit/quick/tgmc/leader/standard_carbine,
+		/datum/outfit/quick/tgmc/leader/combat_rifle,
+		/datum/outfit/quick/tgmc/leader/standard_battlerifle,
+		/datum/outfit/quick/tgmc/leader/auto_shotgun,
+		/datum/outfit/quick/tgmc/leader/standard_laserrifle,
+		/datum/outfit/quick/tgmc/leader/oicw,
+		/datum/outfit/quick/som/marine/standard_assaultrifle,
+		/datum/outfit/quick/som/marine/mpi,
+		/datum/outfit/quick/som/marine/light_carbine,
+		/datum/outfit/quick/som/marine/scout,
+		/datum/outfit/quick/som/marine/shotgunner,
+		/datum/outfit/quick/som/marine/pyro,
+		/datum/outfit/quick/som/marine/breacher,
+		/datum/outfit/quick/som/marine/breacher_melee,
+		/datum/outfit/quick/som/marine/machine_gunner,
+		/datum/outfit/quick/som/marine/charger,
+		/datum/outfit/quick/som/engineer/standard_assaultrifle,
+		/datum/outfit/quick/som/engineer/mpi,
+		/datum/outfit/quick/som/engineer/standard_carbine,
+		/datum/outfit/quick/som/engineer/standard_smg,
+		/datum/outfit/quick/som/engineer/standard_shotgun,
+		/datum/outfit/quick/som/medic/standard_assaultrifle,
+		/datum/outfit/quick/som/medic/mpi,
+		/datum/outfit/quick/som/medic/standard_carbine,
+		/datum/outfit/quick/som/medic/standard_smg,
+		/datum/outfit/quick/som/medic/standard_shotgun,
+		/datum/outfit/quick/som/veteran/standard_assaultrifle,
+		/datum/outfit/quick/som/veteran/standard_smg,
+		/datum/outfit/quick/som/veteran/mpi,
+		/datum/outfit/quick/som/veteran/carbine,
+		/datum/outfit/quick/som/veteran/charger,
+		/datum/outfit/quick/som/veteran/breacher,
+		/datum/outfit/quick/som/veteran/caliver,
+		/datum/outfit/quick/som/veteran/caliver_pack,
+		/datum/outfit/quick/som/veteran/culverin,
+		/datum/outfit/quick/som/veteran/v35breacher,
+		/datum/outfit/quick/som/veteran/rocket_man,
+		/datum/outfit/quick/som/veteran/blinker,
+		/datum/outfit/quick/som/veteran/dragoon,
+		/datum/outfit/quick/som/squad_leader/standard_assaultrifle,
+		/datum/outfit/quick/som/squad_leader/standard_smg,
+		/datum/outfit/quick/som/squad_leader/charger,
+		/datum/outfit/quick/som/squad_leader/caliver,
+		/datum/outfit/quick/som/squad_leader/mpi,
+		/datum/outfit/quick/vsd/standard/grunt_one,
+		/datum/outfit/quick/vsd/standard/grunt_two,
+		/datum/outfit/quick/vsd/standard/grunt_three,
+		/datum/outfit/quick/vsd/standard/lmg,
+		/datum/outfit/quick/vsd/standard/ksg,
+		/datum/outfit/quick/vsd/engineer/l26,
+		/datum/outfit/quick/vsd/engineer/l27,
+		/datum/outfit/quick/vsd/engineer/l28,
+		/datum/outfit/quick/vsd/engineer/l29,
+		/datum/outfit/quick/vsd/medic/ksg,
+		/datum/outfit/quick/vsd/medic/vsd_rifle,
+		/datum/outfit/quick/vsd/medic/vsd_v34,
+		/datum/outfit/quick/vsd/medic/vsd_pdw,
+		/datum/outfit/quick/vsd/spec/flamer,
+		/datum/outfit/quick/vsd/spec/demolitionist,
+		/datum/outfit/quick/vsd/spec/gunslinger,
+		/datum/outfit/quick/vsd/spec/scout,
+		///datum/outfit/quick/vsd/spec/scoutalt,
+		// /datum/outfit/quick/vsd/spec/uslspec_one,
+		// /datum/outfit/quick/vsd/spec/uslspec_two,
+		/datum/outfit/quick/vsd/juggernaut,
+		/datum/outfit/quick/vsd/eod,
+		/datum/outfit/quick/vsd/recon,
+		///datum/outfit/quick/vsd/reconalt,
+		/datum/outfit/quick/pmc/standard,
+		/datum/outfit/quick/pmc/engineer,
+		/datum/outfit/quick/pmc/medic,
+		/datum/outfit/quick/pmc/gunner/smart_machinegun,
+		/datum/outfit/quick/pmc/gunner/smart_rifle,
+		/datum/outfit/quick/pmc/sniper/sniper_rifle,
+		/datum/outfit/quick/pmc/sniper/ra_val,
+		/datum/outfit/quick/pmc/squad_leader/m416,
+		/datum/outfit/quick/icc/standard/icc_battlecarbine,
+		/datum/outfit/quick/icc/standard/icc_sharpshooter,
+		/datum/outfit/quick/icc/standard/icc_assaultcarbine,
+		/datum/outfit/quick/icc/standard/icc_autoshotgun,
+		/datum/outfit/quick/icc/medic/icc_sharpshooter,
+		/datum/outfit/quick/icc/guard/icc_rocket,
+		/datum/outfit/quick/icc/guard/icc_autoshotgun,
+		/datum/outfit/quick/icc/leader/icc_confrontationrifle,
+	)
+
+	for(var/X in loadout_list)
+		.[X] = new X
+
+/obj/machinery/quick_vendor
+	name = "\improper Kwik-E-Quip vendor"
+	desc = "An advanced vendor to instantly arm soldiers with specific sets of equipment, allowing for immediate combat deployment. \
+	Mutually exclusive with the GHMME."
+	icon = 'icons/obj/machines/vending.dmi'
+	icon_state = "specialist"
+	density = TRUE
+	anchored = TRUE
+	layer = BELOW_OBJ_LAYER
+	req_access = null
+	req_one_access = null
+	interaction_flags = INTERACT_MACHINE_TGUI
+	light_range = 1
+	light_power = 0.5
+	light_color = LIGHT_COLOR_BLUE
+	faction = FACTION_NEUTRAL
+	//the different tabs in the vendor
+	var/list/categories = list(
+		"Squad Operative",
+		"Squad Engineer",
+		"Squad Corpsman",
+		"Squad Smartgunner",
+		"Squad Specialist",
+		"Squad Leader",
+	)
+	///Whichever global loadout is used to build the vendor stock
+	var/list/global_list_to_use
+	///If the vendor drops your items, or deletes them when you vend a loadout
+	var/drop_worn_items = FALSE
+
+/obj/machinery/quick_vendor/Initialize(mapload)
+	. = ..()
+	set_stock_list()
+
+///Chooses which global list the vendor will build stock from, gets run on Initialize()
+/obj/machinery/quick_vendor/proc/set_stock_list()
+	global_list_to_use = GLOB.quick_loadouts
+
+/obj/machinery/quick_vendor/Initialize(mapload)
+	. = ..()
+	update_icon()
+
+/obj/machinery/quick_vendor/update_icon()
+	. = ..()
+	if(is_operational())
+		set_light(initial(light_range))
+	else
+		set_light(0)
+
+/obj/machinery/quick_vendor/update_icon_state()
+	. = ..()
+	if(is_operational())
+		icon_state = initial(icon_state)
+	else
+		icon_state = "[initial(icon_state)]-off"
+
+/obj/machinery/quick_vendor/update_overlays()
+	. = ..()
+	if(!is_operational())
+		return
+	. += emissive_appearance(icon, "[icon_state]_emissive", src)
+
+/obj/machinery/quick_vendor/can_interact(mob/user)
+	. = ..()
+	if(!.)
+		return FALSE
+
+	if(!ishuman(user))
+		return FALSE
+
+	var/mob/living/carbon/human/human_user = user
+	if(!allowed(human_user))
+		return FALSE
+
+	if(!isidcard(human_user.get_idcard())) //not wearing an ID
+		return FALSE
+
+	var/obj/item/card/id/user_id = human_user.get_idcard()
+	if(user_id.registered_name != human_user.real_name)
+		return FALSE
+
+	return TRUE
+
+/obj/machinery/quick_vendor/ui_interact(mob/living/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(ui)
+		return
+	ui = new(user, src, "Quickload")
+	ui.open()
+
+/obj/machinery/quick_vendor/ui_state(mob/user)
+	return GLOB.human_adjacent_state
+
+/obj/machinery/quick_vendor/ui_data(mob/living/user)
+	. = ..()
+	var/list/data = list()
+	var/list/loadouts_data_tgui = list()
+	var/list/loadouts_list = isrobot(user) ?  (global_list_to_use + GLOB.robot_loadouts) : global_list_to_use
+	for(var/loadout_data in loadouts_list)
+		var/list/next_loadout_data = list() //makes a list item with the below lines, for each loadout entry in the list
+		var/datum/outfit/quick/current_loadout = loadouts_list[loadout_data]
+		next_loadout_data["job"] = current_loadout.jobtype
+		next_loadout_data["name"] = current_loadout.name
+		next_loadout_data["desc"] = current_loadout.desc
+		next_loadout_data["amount"] = current_loadout.quantity
+		next_loadout_data["outfit"] = current_loadout.type
+		loadouts_data_tgui += list(next_loadout_data)
+	data["loadout_list"] = loadouts_data_tgui
+	var/ui_theme
+	switch(faction)
+		if(FACTION_SOM)
+			ui_theme = "som"
+		if(FACTION_VSD)
+			ui_theme = "syndicate"
+		if(FACTION_CLF)
+			ui_theme = "xeno"
+		else
+			ui_theme = "ntos"
+	data["ui_theme"] = ui_theme
+	data["vendor_categories"] = categories
+	return data
+
+/obj/machinery/quick_vendor/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+	if(.)
+		return
+	switch(action)
+		if("selectLoadout")
+			var/datum/outfit/quick/selected_loadout = isrobot(ui.user) ? (GLOB.robot_loadouts[text2path(params["loadout_outfit"])] || global_list_to_use[text2path(params["loadout_outfit"])]) : global_list_to_use[text2path(params["loadout_outfit"])]
+			if(!selected_loadout)
+				to_chat(ui.user, span_warning("Error when loading this loadout"))
+				CRASH("Fail to load loadouts")
+			if(selected_loadout.quantity == 0)
+				to_chat(usr, span_warning("This loadout has been depleted, you'll need to pick another."))
+				return
+			var/obj/item/card/id/user_id = usr.get_idcard() //ui.user better?
+			var/user_job = user_id.rank
+			user_job = replacetext(user_job, "Fallen ", "") //So that jobs in valhalla can vend a loadout too
+			if(selected_loadout.jobtype != user_job && selected_loadout.require_job != FALSE)
+				to_chat(usr, span_warning("You are not in the right job for this loadout!"))
+				return
+			if(user_id.id_flags & USED_GHMME) //Same check here, in case they opened the UI before vending a loadout somehow
+				to_chat(ui.user, span_warning("Access denied, continue using the GHHME."))
+				return FALSE
+			if(user_id.id_flags & CAN_BUY_LOADOUT)
+				for(var/points in user_id.marine_points)
+					if(user_id.marine_points[points] != GLOB.default_marine_points[points])
+						to_chat(ui.user, span_warning("Access denied, continue using the GHHME."))
+						return FALSE
+				for(var/option in user_id.marine_buy_choices)
+					if(user_id.marine_buy_choices[option] != GLOB.marine_selector_cats[option])
+						to_chat(ui.user, span_warning("Access denied, continue using the GHHME."))
+						return FALSE
+				selected_loadout.quantity --
+				if(drop_worn_items)
+					for(var/obj/item/inventory_items in ui.user)
+						if(inventory_items.equip_slot_flags == ITEM_SLOT_ID)
+							continue
+						ui.user.dropItemToGround(inventory_items)
+				selected_loadout.equip(ui.user) //actually equips the loadout
+				//After vending a quick loadout, remove points and GHMME options so that you can't vend them via loadout vendor
+				for(var/points in user_id.marine_points)
+					user_id.marine_points[points] = 0
+				for(var/option in user_id.marine_buy_choices)
+					user_id.marine_buy_choices[option] = 0
+			else
+				to_chat(usr, span_warning("You can't buy things from this category anymore."))
+
+/obj/machinery/quick_vendor/som
+	icon_state = "loadoutvendor"
+	faction = FACTION_SOM
+	categories = list(
+		"SOM Squad Standard",
+		"SOM Squad Engineer",
+		"SOM Squad Medic",
+		"SOM Squad Veteran",
+		"SOM Squad Leader",
+	)
+
+/obj/machinery/quick_vendor/vsd
+	name = "KZ Kwik-E-Quip vendor"
+	icon_state = "loadoutvendor"
+	faction = FACTION_VSD
+	categories = list(
+		"KZ Standard",
+		"KZ Medic",
+		"KZ Engineer",
+		"KZ Specialist",
+		"KZ Squad Leader",
+	)
+
+/obj/machinery/quick_vendor/pmc
+	name = "AC Kwik-E-Quip Vendor"
+	icon_state = "loadoutvendor"
+	faction = FACTION_NANOTRASEN
+	categories = list(
+		"AC Standard",
+		"AC Engineer",
+		"AC Medic",
+		"AC Gunner",
+		"AC Specialist",
+		"AC Squad Leader",
+	)
+
+/obj/machinery/quick_vendor/icc
+	name = "CM Kwik-E-Quip Vendor"
+	icon_state = "loadoutvendor"
+	faction = FACTION_ICC
+	categories = list(
+		"CM Standard",
+		"CM Medic",
+		"CM Guardsman",
+		"CM Squad Leader",
+	)
+
+
+/obj/machinery/quick_vendor/som
+	desc = "An advanced vendor used by the SOM to rapidly equip their soldiers"
+	faction = VENDOR_FACTION_SOM
+	categories = list(
+		"SOM Squad Standard",
+		"SOM Squad Engineer",
+		"SOM Squad Medic",
+		"SOM Squad Veteran",
+		"SOM Squad Leader",
+	)
+
+
+/obj/machinery/quick_vendor/vsd
+	desc = "An advanced vendor used by the KZ to rapidly equip their operatives"
+	faction = VENDOR_FACTION_VSD
+	categories = list(
+		"KZ Standard",
+		"KZ Medic",
+		"KZ Engineer",
+		"KZ Specialist",
+		"KZ Squad Leader",
+	)
+
+
+/obj/machinery/quick_vendor/clf
+	desc = "An advanced vendor used by the Cult to rapidly equip their devotees"
+	faction = VENDOR_FACTION_CLF
+	categories = list(
+		"Cultist",
+		"Cultist Mender",
+		"Cult Offering",
+		"Cultist Sect Leader",
+	)
