@@ -1,0 +1,3 @@
+#ckey = Rank
+Zeldazackman = Host
+CrimsonQuiver = Host
