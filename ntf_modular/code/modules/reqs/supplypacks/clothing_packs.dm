@@ -1,0 +1,24 @@
+/datum/supply_packs/clothing/night_visionntcr
+	name = "SFMC Stalker-R goggles"
+	contains = list(/obj/item/clothing/glasses/night/m42_night_goggles/ntc_r)
+	cost = 3300
+
+/datum/supply_packs/clothing/night_visionntcg
+	name = "SFMC Stalker-G goggles"
+	contains = list(/obj/item/clothing/glasses/night/m42_night_goggles/ntc_g)
+	cost = 3300
+
+/datum/supply_packs/clothing/night_visionntcb
+	name = "SFMC Stalker-B goggles"
+	contains = list(/obj/item/clothing/glasses/night/m42_night_goggles/ntc_b)
+	cost = 3300
+
+/datum/supply_packs/clothing/cm13nvg
+	name = "CM-13 GSW night vision goggles"
+	contains = list(/obj/item/clothing/glasses/night/m56_goggles/vsd)
+	cost = 1100
+
+/datum/supply_packs/clothing/cm13nvgalt
+	name = "CM-13 GSW night vision faceplate"
+	contains = list(/obj/item/clothing/glasses/night/m56_goggles/vsd/alt)
+	cost = 1100
