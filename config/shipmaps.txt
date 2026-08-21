@@ -1,0 +1,63 @@
+This file contains a list of maps for use in map rotation.
+#Lines starting with # are ignored.
+Lines not inside map blocks are also ignored
+Duplicated entries use the latter one.
+All whitespace at the start and end of lines is ignored. (including indentation, thats just for show)
+Format:
+#map [map name] (name of .json file in _maps folder without the .json part)
+	minplayers [number] (0 or less disables this requirement)
+	maxplayers [number] (0 or less disables this requirement)
+	default (The last map with this defined will get all votes of players who have not explicitly voted for a map)
+	voteweight [number] (How much to count each player vote as, defaults to 1, setting to 0.5 counts each vote as half a vote, 2 as double, etc, Setting to 0 disables the map but allows players to still pick it)
+	disabled (disables the map)
+endmap
+
+map debugdalus
+	disabled
+endmap
+
+map theseus
+	minplayers 600
+endmap
+
+map Container
+        minplayers 0
+endmap
+
+map ntc_nine_tailed_fox
+	minplayers 0
+	default
+endmap
+
+map eagle
+        minplayers 0
+endmap
+
+map eagleclassic
+        minplayers 0
+endmap
+
+map pillar_of_spring
+	minplayers 600
+endmap
+
+map sulaco
+	minplayers 600
+endmap
+
+map arachne
+	minplayers 600
+endmap
+
+map combat_patrol_base
+	minplayers 0
+endmap
+
+map iteron
+	minplayers 0
+endmap
+
+map multiz_debug
+	disabled
+endmap
+
