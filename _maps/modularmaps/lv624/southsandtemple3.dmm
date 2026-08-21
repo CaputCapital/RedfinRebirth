@@ -1,0 +1,839 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"bs" = (
+/obj/structure/flora/jungle/vines/heavy,
+/turf/open/floor/plating/ground/dirtgrassborder/corner{
+	dir = 4
+	},
+/area/lv624/ground/jungle8)
+"cm" = (
+/obj/structure/sign/securearea,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"dv" = (
+/obj/effect/decal/cleanable/blood/splatter/animated,
+/turf/open/floor/tile/whiteyellow/full,
+/area/lv624/lazarus/sandtemple/garbledradio)
+"eP" = (
+/obj/structure/flora/grass/brown,
+/turf/open/liquid/water/river/autosmooth,
+/area/lv624/ground/river3)
+"fB" = (
+/obj/structure/fence,
+/obj/structure/sign/securearea,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"gQ" = (
+/obj/structure/fence,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"hE" = (
+/obj/effect/turf_decal/warning_stripes/thin{
+	dir = 1
+	},
+/obj/effect/ai_node,
+/turf/open/floor,
+/area/lv624/ground/sand9)
+"hG" = (
+/turf/open/liquid/water/river/autosmooth,
+/area/space)
+"jh" = (
+/obj/structure/flora/jungle/vines/heavy,
+/turf/open/ground/grass,
+/area/lv624/ground/jungle8)
+"km" = (
+/turf/open/floor/plating/ground/dirtgrassborder/corner{
+	dir = 4
+	},
+/area/lv624/ground/jungle8)
+"kv" = (
+/obj/structure/platform_decoration{
+	dir = 4
+	},
+/turf/open/floor/plating/ground/dirt/dug,
+/area/lv624/ground/sand9)
+"lb" = (
+/turf/open/ground/grass/grass2,
+/area/lv624/ground/jungle8)
+"mm" = (
+/obj/structure/flora/jungle/vines,
+/turf/open/floor/plating/ground/dirtgrassborder/corner2{
+	dir = 1
+	},
+/area/lv624/ground/jungle8)
+"mz" = (
+/turf/open/floor/tile/whiteyellow/full,
+/area/lv624/lazarus/sandtemple/garbledradio)
+"mL" = (
+/turf/closed/gm/dense,
+/area/lv624/ground/caves/rock)
+"mT" = (
+/obj/effect/turf_decal/warning_stripes/thin{
+	dir = 8
+	},
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"og" = (
+/obj/structure/flora/jungle/plantbot1/alien,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"oG" = (
+/obj/structure/stairs/seamless/platform{
+	dir = 1
+	},
+/turf/open/floor/tile/whiteyellow/full,
+/area/lv624/lazarus/sandtemple/garbledradio)
+"oY" = (
+/obj/effect/landmark/weed_node,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand3)
+"qF" = (
+/obj/effect/landmark/weed_node,
+/turf/open/liquid/water/river/autosmooth,
+/area/lv624/ground/river3)
+"qK" = (
+/obj/effect/turf_decal/warning_stripes/thin{
+	dir = 2
+	},
+/obj/effect/landmark/weed_node,
+/obj/effect/turf_decal/warning_stripes/thin{
+	dir = 6
+	},
+/turf/open/floor,
+/area/lv624/ground/sand9)
+"rc" = (
+/obj/effect/ai_node,
+/turf/open/liquid/water/river/autosmooth,
+/area/lv624/ground/sand6)
+"sC" = (
+/obj/effect/ai_node,
+/turf/open/floor/tile/whiteyellow/full,
+/area/lv624/lazarus/sandtemple/garbledradio)
+"tf" = (
+/obj/structure/stairs/seamless/platform,
+/turf/open/floor/tile/whiteyellow/full,
+/area/lv624/lazarus/sandtemple/garbledradio)
+"tl" = (
+/obj/effect/decal/cleanable/blood/splatter/animated,
+/obj/effect/landmark/weed_node,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"tA" = (
+/obj/item/weapon/sword/machete,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"ut" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/turf/open/floor/tile/whiteyellow/full,
+/area/lv624/lazarus/sandtemple/garbledradio)
+"vZ" = (
+/obj/machinery/floodlight/colony,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"yc" = (
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand6)
+"zi" = (
+/obj/structure/showcase,
+/turf/open/floor/tile/whiteyellow/full,
+/area/lv624/lazarus/sandtemple/garbledradio)
+"Ai" = (
+/obj/structure/glowshroom,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"Dl" = (
+/obj/effect/ai_node,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand3)
+"Gx" = (
+/obj/effect/landmark/weed_node,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"Jt" = (
+/turf/open/floor/plating/ground/dirtgrassborder/corner2{
+	dir = 1
+	},
+/area/lv624/ground/jungle8)
+"JB" = (
+/turf/closed/wall,
+/area/lv624/ground/sand9)
+"JK" = (
+/turf/open/liquid/water/river/autosmooth,
+/area/lv624/ground/sand6)
+"Lh" = (
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand3)
+"Mo" = (
+/obj/structure/platform_decoration{
+	dir = 8
+	},
+/turf/open/liquid/water/river/autosmooth,
+/area/lv624/ground/sand6)
+"My" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"OZ" = (
+/obj/structure/stairs/seamless{
+	dir = 8
+	},
+/turf/open/floor/tile/whiteyellow/full,
+/area/lv624/lazarus/sandtemple/garbledradio)
+"PL" = (
+/obj/structure/flora/jungle/plantbot1/alien,
+/turf/open/liquid/water/river/autosmooth,
+/area/lv624/ground/river3)
+"PZ" = (
+/obj/effect/spawner/random/engineering/tool,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"Qj" = (
+/obj/structure/flora/jungle/vines,
+/turf/open/floor/plating/ground/dirtgrassborder{
+	dir = 1
+	},
+/area/lv624/ground/jungle8)
+"QF" = (
+/turf/open/ground/grass,
+/area/lv624/ground/jungle8)
+"RJ" = (
+/obj/effect/ai_node,
+/turf/open/liquid/water/river/autosmooth,
+/area/lv624/ground/river3)
+"Sm" = (
+/obj/structure/flora/ausbushes/palebush,
+/turf/open/liquid/water/river/autosmooth,
+/area/lv624/ground/river3)
+"SD" = (
+/turf/open/liquid/water/river/autosmooth,
+/area/lv624/ground/sand3)
+"SJ" = (
+/obj/structure/stairs/seamless{
+	dir = 4
+	},
+/turf/open/floor/tile/whiteyellow/full,
+/area/lv624/lazarus/sandtemple/garbledradio)
+"Tp" = (
+/turf/open/liquid/water/river/autosmooth,
+/area/lv624/ground/river3)
+"Tt" = (
+/turf/closed/wall/r_wall/chigusa,
+/area/lv624/lazarus/sandtemple/garbledradio)
+"TX" = (
+/obj/effect/ai_node,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"UN" = (
+/obj/structure/flora/ausbushes/reedbush,
+/turf/open/liquid/water/river/autosmooth,
+/area/lv624/ground/river3)
+"UW" = (
+/obj/docking_port/stationary/crashmode,
+/obj/structure/stairs/seamless{
+	dir = 8
+	},
+/turf/open/floor/tile/whiteyellow/full,
+/area/lv624/lazarus/sandtemple/garbledradio)
+"Wt" = (
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"Wv" = (
+/obj/effect/decal/cleanable/blood/splatter/animated,
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+"WB" = (
+/obj/effect/landmark/weed_node,
+/turf/open/floor/tile/whiteyellow/full,
+/area/lv624/lazarus/sandtemple/garbledradio)
+"Xv" = (
+/obj/machinery/door/airlock/mainship/generic{
+	desc = "This strange temple is covered in runes. It looks extremely ancient.";
+	dir = 2;
+	name = "Strange Temple"
+	},
+/turf/open/floor/tile/whiteyellow/full,
+/area/lv624/lazarus/sandtemple/garbledradio)
+"Xx" = (
+/turf/closed/mineral/smooth,
+/area/lv624/ground/caves/rock)
+"XR" = (
+/obj/effect/turf_decal/warning_stripes/thin{
+	dir = 8
+	},
+/obj/effect/turf_decal/warning_stripes/thin{
+	dir = 9
+	},
+/turf/open/floor/plating/ground/dirt,
+/area/lv624/ground/sand9)
+
+(1,1,1) = {"
+JK
+JK
+JK
+SD
+Lh
+Lh
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Wt
+Wt
+Wt
+TX
+Wt
+hE
+qK
+Wt
+Wt
+Tp
+hG
+"}
+(2,1,1) = {"
+Mo
+JK
+JK
+Lh
+Lh
+Lh
+Lh
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Wt
+Wt
+Wt
+Wt
+XR
+mT
+Wt
+Wt
+Tp
+Tp
+"}
+(3,1,1) = {"
+JK
+rc
+yc
+Lh
+Lh
+Dl
+Lh
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Wt
+Wt
+Gx
+Wt
+Wt
+Wt
+Wt
+Wt
+Tp
+Tp
+"}
+(4,1,1) = {"
+yc
+yc
+yc
+Lh
+oY
+Lh
+Lh
+Xx
+Xx
+Xx
+Xx
+Xx
+Wt
+gQ
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Tp
+Tp
+"}
+(5,1,1) = {"
+yc
+yc
+yc
+Lh
+Lh
+Lh
+Lh
+Xx
+Xx
+Xx
+Xx
+Wt
+Wt
+gQ
+Wt
+vZ
+Wt
+Wt
+Wt
+Wt
+Wt
+vZ
+Wt
+Tp
+"}
+(6,1,1) = {"
+tf
+OZ
+OZ
+OZ
+OZ
+UW
+Tt
+Tt
+Xx
+Xx
+Wt
+Wt
+Wt
+gQ
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Tp
+"}
+(7,1,1) = {"
+mz
+mz
+mz
+WB
+mz
+mz
+mz
+Tt
+Tt
+Xx
+Wt
+Wt
+cm
+JB
+gQ
+gQ
+fB
+JB
+gQ
+gQ
+fB
+JB
+Wt
+Tp
+"}
+(8,1,1) = {"
+WB
+mz
+mz
+mz
+WB
+mz
+mz
+mz
+Tt
+zi
+Wt
+Wt
+Wt
+Gx
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Tp
+"}
+(9,1,1) = {"
+mz
+sC
+mz
+mz
+mz
+sC
+mz
+mz
+Xv
+mz
+Wt
+Wt
+og
+Wt
+Wt
+Wt
+Wt
+og
+Wt
+Wt
+Tp
+Tp
+Tp
+Tp
+"}
+(10,1,1) = {"
+mz
+ut
+dv
+mz
+mz
+mz
+mz
+mz
+Tt
+zi
+Wt
+TX
+Wt
+Wt
+Wt
+Wt
+Wt
+Tp
+RJ
+Tp
+Tp
+Tp
+Tp
+Tp
+"}
+(11,1,1) = {"
+WB
+mz
+mz
+mz
+mz
+mz
+mz
+Tt
+Tt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Tp
+Tp
+Tp
+Tp
+Tp
+UN
+Tp
+"}
+(12,1,1) = {"
+oG
+SJ
+SJ
+SJ
+SJ
+SJ
+Tt
+Tt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Tp
+Tp
+Tp
+eP
+qF
+Tp
+Tp
+Tp
+Tp
+"}
+(13,1,1) = {"
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+og
+Wt
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+PL
+Tp
+Tp
+"}
+(14,1,1) = {"
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+og
+Wt
+Wt
+Wt
+Wt
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+UN
+Tp
+Tp
+Tp
+Tp
+"}
+(15,1,1) = {"
+Wt
+TX
+Wt
+Wt
+Wt
+TX
+Wt
+Wt
+Wv
+Wt
+Wt
+RJ
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+PL
+Tp
+Tp
+Tp
+Tp
+Tp
+"}
+(16,1,1) = {"
+kv
+Wt
+Wt
+Wt
+Gx
+Wt
+Wt
+Wt
+My
+Wt
+Tp
+Tp
+Tp
+Tp
+Tp
+Sm
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+"}
+(17,1,1) = {"
+Xx
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+Wt
+tA
+Wt
+Tp
+eP
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+UN
+Tp
+Tp
+"}
+(18,1,1) = {"
+Xx
+Gx
+Wt
+Ai
+Wt
+Wt
+PZ
+Wt
+Wt
+Wt
+Tp
+Tp
+Tp
+Tp
+UN
+Tp
+Tp
+Tp
+Tp
+UN
+Tp
+Tp
+Tp
+mm
+"}
+(19,1,1) = {"
+Tt
+TX
+tl
+Wt
+Wt
+Wt
+mL
+Wt
+Wt
+Wt
+Tp
+Tp
+UN
+Tp
+Tp
+Tp
+PL
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Qj
+"}
+(20,1,1) = {"
+Tt
+tA
+My
+Wt
+Wt
+Xx
+mL
+mL
+mL
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+UN
+Tp
+Tp
+eP
+Tp
+Tp
+Tp
+Jt
+bs
+"}
+(21,1,1) = {"
+Tt
+Wt
+Wt
+Wt
+Xx
+Xx
+Xx
+Xx
+mL
+Tp
+PL
+Tp
+Tp
+UN
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Jt
+km
+lb
+"}
+(22,1,1) = {"
+Tt
+Tt
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+mL
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Jt
+km
+QF
+jh
+"}
